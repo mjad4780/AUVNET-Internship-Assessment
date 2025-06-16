@@ -1,8 +1,6 @@
-import 'package:education/core/extensions/extention_navigator.dart';
-import 'package:education/core/helpers/spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:task/core/helpers/spacing.dart';
+import 'package:task/core/extensions/extention_navigator.dart';
 
 class AppTextButton extends StatelessWidget {
   final double? borderRadius;
@@ -37,7 +35,7 @@ class AppTextButton extends StatelessWidget {
           ),
         ),
         backgroundColor: WidgetStatePropertyAll(
-          backgroundColor ?? context.color.blue,
+          backgroundColor ?? context.color.lightGrey100,
         ),
         padding: WidgetStateProperty.all<EdgeInsets>(
           EdgeInsets.symmetric(
@@ -50,34 +48,15 @@ class AppTextButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Row(
-        children: [
-          const Spacer(),
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              buttonText,
-              style: context.textStyle.headlineMedium!.copyWith(
-                color: context.color.white,
-                fontSize: 19,
-              ),
-            ),
+      child: Align(
+        alignment: Alignment.center,
+        child: Text(
+          buttonText,
+          style: context.textStyle.headlineMedium!.copyWith(
+            color: context.color.white100,
+            fontSize: 19,
           ),
-          const Spacer(),
-          Container(
-            width: width(context) / 9,
-            height: height(context),
-            decoration: BoxDecoration(
-              color: context.color.white,
-              borderRadius: BorderRadius.circular(60),
-            ),
-            child: Icon(
-              Icons.arrow_forward,
-              color: context.color.blue,
-              size: 28,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

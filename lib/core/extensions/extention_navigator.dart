@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:task/core/style/color_extension.dart';
 
 import '../language/app_localizations.dart';
-import '../style/theme/color_extension.dart';
 
 extension Navigation on BuildContext {
   MyColors get color => Theme.of(this).extension<MyColors>()!;
@@ -11,7 +11,7 @@ extension Navigation on BuildContext {
   // style
   TextTheme get textStyle => Theme.of(this).textTheme;
 
-//Language
+  //Language
   String translate(String langkey) {
     return AppLocalizations.of(this)!.translate(langkey).toString();
   }
@@ -23,14 +23,18 @@ extension Navigation on BuildContext {
   }
 
   Future<dynamic> pushReplacementNamed(String routeName, {Object? arguments}) {
-    return Navigator.of(this)
-        .pushReplacementNamed(routeName, arguments: arguments);
+    return Navigator.of(
+      this,
+    ).pushReplacementNamed(routeName, arguments: arguments);
   }
 
-  Future<dynamic> pushNamedAndRemoveUntil(String routeName,
-      {Object? arguments}) {
-    return Navigator.of(this)
-        .pushNamedAndRemoveUntil(routeName, (route) => false);
+  Future<dynamic> pushNamedAndRemoveUntil(
+    String routeName, {
+    Object? arguments,
+  }) {
+    return Navigator.of(
+      this,
+    ).pushNamedAndRemoveUntil(routeName, (route) => false);
   }
 
   void pop() => Navigator.of(this).pop();

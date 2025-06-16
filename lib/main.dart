@@ -15,9 +15,9 @@ void main() async {
 
   Bloc.observer = MyBlocObserver();
   setupServise();
-  await getIt<ConnectivityController>().init();
+  // await getIt<ConnectivityController>().init();
 
-  await getIt<CacheHelper>().init();
+  // await getIt<CacheHelper>().init();
 
   await ScreenUtil.ensureScreenSize();
 
@@ -25,9 +25,7 @@ void main() async {
   ErrorWidget.builder =
       (FlutterErrorDetails details) => ModernErrorScreen(errorDetails: details);
 
-  runApp(
-    DevicePreview(enabled: true, builder: (context) => const EducationApp()),
-  );
+  runApp(DevicePreview(enabled: true, builder: (context) => const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

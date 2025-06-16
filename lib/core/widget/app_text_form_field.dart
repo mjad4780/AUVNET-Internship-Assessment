@@ -1,7 +1,7 @@
-import 'package:education/core/extensions/extention_navigator.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task/core/extensions/extention_navigator.dart';
 
 class AppTextFormField extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
@@ -47,17 +47,20 @@ class AppTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         prefixIcon: prfixIcon,
         isDense: true,
-        contentPadding: contentPadding ??
+        contentPadding:
+            contentPadding ??
             EdgeInsets.symmetric(horizontal: 20.w, vertical: 18.h),
-        focusedBorder: focusedBorder ??
+        focusedBorder:
+            focusedBorder ??
             OutlineInputBorder(
               borderSide: BorderSide(
-                color: context.color.mainBlue,
+                color: context.color.darkBackground58,
                 width: 1.3,
               ),
               borderRadius: BorderRadius.circular(22.0),
             ),
-        enabledBorder: enabledBorder ??
+        enabledBorder:
+            enabledBorder ??
             OutlineInputBorder(
               borderSide: BorderSide(
                 color: context.color.lighterGray,
@@ -66,17 +69,11 @@ class AppTextFormField extends StatelessWidget {
               borderRadius: BorderRadius.circular(22.0),
             ),
         errorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Colors.red,
-            width: 1.3,
-          ),
+          borderSide: const BorderSide(color: Colors.red, width: 1.3),
           borderRadius: BorderRadius.circular(22.0),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
-            color: Colors.red,
-            width: 1.3,
-          ),
+          borderSide: const BorderSide(color: Colors.red, width: 1.3),
           borderRadius: BorderRadius.circular(22.0),
         ),
         errorStyle: context.textStyle.bodyMedium!.copyWith(color: Colors.red),
