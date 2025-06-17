@@ -37,12 +37,5 @@ class HomeRepositoryImpl implements HomeRepository {
         return Left(ServerFailure(response.messege));
       }
     }
-
-    // Try to fetch from remote
-  }
-
-  @override
-  Future<Either<Failure, HomeEntity>> refreshHomeData() async {
-    return await getHomeData();
   }
 }

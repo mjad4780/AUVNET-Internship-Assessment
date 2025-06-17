@@ -8,5 +8,3 @@ sealed class HomeEvent extends Equatable {
 }
 
 class FetchHomeData extends HomeEvent {}
-
-class RefreshHomeData extends HomeEvent {}

@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ErrorHandlerSupabase {
-// hundle erorr supabase and all exceotion
+  // hundle erorr supabase and all exceotion
   static String getErrorMessage(dynamic error) {
     if (error is SocketException) {
       return "No internet connection. Please check your network.";
@@ -21,6 +21,8 @@ class ErrorHandlerSupabase {
       return "HTTP request failed: ${error.message}";
     } else if (error is FormatException) {
       return "Data format error. Please contact support.";
+    } else if (error is AuthException) {
+      return "AuthException: ${error.message}";
     } else if (error is PlatformException) {
       return "Platform error: ${error.message}";
     } else if (error is Exception) {

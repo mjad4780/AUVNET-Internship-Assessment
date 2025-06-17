@@ -1,7 +1,7 @@
-class ReqestBody {
+class RequestBody {
   final String email;
   final String password;
   //map
 
-  ReqestBody(this.email, this.password);
+  RequestBody(this.email, this.password);
 }

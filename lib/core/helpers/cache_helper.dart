@@ -1,9 +1,9 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class SecureCacheHelper {
+class CacheHelper {
   final FlutterSecureStorage _storage;
 
-  SecureCacheHelper(this._storage);
+  CacheHelper(this._storage);
 
   // ---- Helper Methods ----
   Future<void> _write(String key, dynamic value) async {

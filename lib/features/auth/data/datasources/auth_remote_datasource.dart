@@ -1,3 +1,6 @@
+import '../models/user_model.dart';
+
 abstract class AuthRemoteDataSource {
-  // TODO: Define methods like login(email, password)
+  Future<UserModel> signUp(String email, String password);
+  Future<UserModel> signIn(String email, String password);
 }

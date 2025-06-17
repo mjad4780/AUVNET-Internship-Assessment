@@ -5,16 +5,12 @@ import '../repositories/home_repository.dart';
 
 import 'package:dartz/dartz.dart';
 
-class GetHomeData {
+class HomeUseCase {
   final HomeRepository repository;
 
-  GetHomeData(this.repository);
+  HomeUseCase(this.repository);
 
   Future<Either<Failure, HomeEntity>> call() async {
     return await repository.getHomeData();
-  }
-
-  Future<Either<Failure, HomeEntity>> refresh() async {
-    return await repository.refreshHomeData();
   }
 }
