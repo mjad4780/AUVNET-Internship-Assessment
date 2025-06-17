@@ -1,131 +1,62 @@
-import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
+class SecureCacheHelper {
+  final FlutterSecureStorage _storage;
 
-class CacheHelper {
-  static late SharedPreferences sharedPreferences;
+  SecureCacheHelper(this._storage);
 
-//! Here The Initialize of cache .
-  init() async {
-    sharedPreferences = await SharedPreferences.getInstance();
+  // ---- Helper Methods ----
+  Future<void> _write(String key, dynamic value) async {
+    await _storage.write(key: key, value: value.toString());
   }
 
-//! this method to put data in local database using key
-
-  String? getDataString({
-    required String key,
-  }) {
-    return sharedPreferences.getString(key);
+  Future<T?> _read<T>(String key, T Function(String) parser) async {
+    final value = await _storage.read(key: key);
+    return value != null ? parser(value) : null;
   }
 
-//! this method to put data in local database using key
-
-  Future<bool> saveData({required String key, required dynamic value}) async {
-    if (value is bool) {
-      return await sharedPreferences.setBool(key, value);
-    }
-    if (value is String) {
-      return await sharedPreferences.setString(key, value);
-    }
-
-    if (value is int) {
-      return await sharedPreferences.setInt(key, value);
-    } else {
-      return await sharedPreferences.setDouble(key, value);
-    }
+  // ---- Main Methods ----
+  Future<void> saveString({required String key, required String value}) async {
+    await _write(key, value);
   }
 
-//! this method to get data already saved in local database
-
-  dynamic getData({required String key}) {
-    return sharedPreferences.get(key);
+  Future<String?> getString(String key) async {
+    return await _read(key, (value) => value);
   }
 
-//! remove data using specific key
-
-  Future<bool> removeData({required String key}) async {
-    return await sharedPreferences.remove(key);
+  Future<void> saveBool({required String key, required bool value}) async {
+    await _write(key, value);
   }
 
-//! this method to check if local database contains {key}
-  Future<bool> containsKey({required String key}) async {
-    return sharedPreferences.containsKey(key);
+  Future<bool?> getBool(String key) async {
+    return await _read(key, (value) => value == 'true');
   }
 
-//! clear all data in the local database
-  Future<bool> clearData() async {
-    return await sharedPreferences.clear();
+  Future<void> saveInt({required String key, required int value}) async {
+    await _write(key, value);
   }
 
-//! this method to put data in local database using key
-  Future<dynamic> put({
-    required String key,
-    required dynamic value,
-  }) async {
-    if (value is String) {
-      return await sharedPreferences.setString(key, value);
-    } else if (value is bool) {
-      return await sharedPreferences.setBool(key, value);
-    } else {
-      return await sharedPreferences.setInt(key, value);
-    }
+  Future<int?> getInt(String key) async {
+    return await _read(key, int.parse);
   }
 
-  Future<void> cachedlanguagecode(String languagecode) async {
-    sharedPreferences.setString("LOCALE", languagecode);
+  Future<void> saveDouble({required String key, required double value}) async {
+    await _write(key, value);
   }
 
-  Future<String> getCachedlanguagecode() async {
-    final cachedLanguagecode = sharedPreferences.getString("LOCALE");
-    if (cachedLanguagecode != null) {
-      return cachedLanguagecode;
-    } else {
-      return "en";
-    }
+  Future<double?> getDouble(String key) async {
+    return await _read(key, double.parse);
   }
 
-  //test save course
-  // داخل class CacheHelper
-  static const String _savedCoursesKey = 'saved_courses';
-
-  Future<bool> toggleCourseSave(String courseId) async {
-    final savedCourses = getSavedCourses();
-    final isSaved = savedCourses.contains(courseId);
-
-    if (isSaved) {
-      savedCourses.remove(courseId);
-    } else {
-      savedCourses.add(courseId);
-    }
-
-    return await sharedPreferences.setStringList(
-      _savedCoursesKey,
-      savedCourses.toList(),
-    );
+  Future<void> removeKey(String key) async {
+    await _storage.delete(key: key);
   }
 
-  Set<String> getSavedCourses() {
-    return sharedPreferences.getStringList(_savedCoursesKey)?.toSet() ?? {};
+  Future<bool> containsKey(String key) async {
+    return await _storage.containsKey(key: key);
   }
 
-  static const String _watchedVideosKey = 'watched_videos';
-
-  Future<void> saveWatchedVideos(Map<int, bool> watchedVideos) async {
-    // تحويل المفاتيح إلى String
-    final stringKeyMap = watchedVideos.map((key, value) => MapEntry(key.toString(), value));
-    await sharedPreferences.setString(
-      _watchedVideosKey,
-      json.encode(stringKeyMap),
-    );
-  }
-
-  Map<int, bool> getWatchedVideos() {
-    final data = sharedPreferences.getString(_watchedVideosKey);
-    if (data != null) {
-      final Map<String, dynamic> stringKeyMap = json.decode(data);
-      // تحويل المفاتيح مرة أخرى إلى int
-      return stringKeyMap.map((key, value) => MapEntry(int.parse(key), value as bool));
-    }
-    return {};
+  Future<void> clearAll() async {
+    await _storage.deleteAll();
   }
 }

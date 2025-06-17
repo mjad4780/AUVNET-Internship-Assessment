@@ -3,18 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:task/core/get_it/get_it.dart';
-import 'package:task/core/helpers/cache_helper.dart';
-import 'package:task/core/helpers/connectivity_controller.dart';
+
 import 'package:task/core/helpers/observer.dart';
 import 'package:task/core/widget/modern_error_screen.dart';
 import 'package:task/key.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:task/features/home/presentation/pages/home_page.dart';
+
+import 'core/service/cache/hive_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   Bloc.observer = MyBlocObserver();
   setupServise();
+  await HiveService.initHive();
   // await getIt<ConnectivityController>().init();
 
   // await getIt<CacheHelper>().init();
@@ -25,122 +28,333 @@ void main() async {
   ErrorWidget.builder =
       (FlutterErrorDetails details) => ModernErrorScreen(errorDetails: details);
 
-  runApp(DevicePreview(enabled: true, builder: (context) => const MyApp()));
+  runApp(DevicePreview(enabled: true, builder: (context) => MyApp()));
 }
 
+// SmoothPageIndicator(
+//    controller: controller,
+//    count:  6,
+//    axisDirection: Axis.vertical,
+//    effect:  SlideEffect(
+//       spacing:  8.0,
+//       radius:  4.0,
+//       dotWidth:  24.0,
+//       dotHeight:  16.0,
+//       paintStyle:  PaintingStyle.stroke,
+//       strokeWidth:  1.5,
+//       dotColor:  Colors.grey,
+//       activeDotColor:  Colors.indigo
+//   ),
+// )
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'NAWEL App',
+      // theme: ThemeData(primarySwatch: Colors.purple),
+      home: HomeScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _OnboardingScreenState createState() => _OnboardingScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  final List<OnboardingData> onboardingPages = [
+    OnboardingData(
+      title: "all-in-one delivery",
+      description:
+          "Order groceries, medicines, and meals delivered straight to your door",
+    ),
+    OnboardingData(
+      title: "User-to-User Delivery",
+      description: "Send or receive items from other users quickly and easily",
+    ),
+    OnboardingData(
+      title: "Sales & Discounts",
+      description: "Discover exclusive sales and deals every day",
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              // Color(0xFF8B4CDE),
+              // Color(0xFFE6A85C),
+              Color(0xFFFFFFFF),
+              Color(0xFF7ED4C7),
+            ],
+            stops: [0.79, 1.3],
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            children: [
+              // Status bar area
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Time',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 18,
+                          height: 12,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                        SizedBox(width: 2),
+                        Container(
+                          width: 18,
+                          height: 12,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                        SizedBox(width: 2),
+                        Container(
+                          width: 24,
+                          height: 12,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              Expanded(
+                child: PageView.builder(
+                  controller: _pageController,
+                  onPageChanged: (index) {
+                    setState(() {
+                      _currentPage = index;
+                    });
+                  },
+                  itemCount: onboardingPages.length,
+                  itemBuilder: (context, index) {
+                    return OnboardingPage(
+                      data: onboardingPages[index],
+                      currentPage: _currentPage,
+                      totalPages: onboardingPages.length,
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+}
+
+class OnboardingPage extends StatelessWidget {
+  final OnboardingData data;
+  final int currentPage;
+  final int totalPages;
+
+  const OnboardingPage({
+    super.key,
+    required this.data,
+    required this.currentPage,
+    required this.totalPages,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        children: [
+          SizedBox(height: 40),
+
+          // Logo section
+          SizedBox(
+            width: 200,
+            height: 200,
+            child: Stack(
+              children: [
+                // Background circle
+                Container(
+                  width: 200,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                // Logo
+                Positioned(
+                  bottom: 40,
+                  left: 20,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Number 9 with design
+                      Container(
+                        child: Stack(
+                          children: [
+                            Text(
+                              '9',
+                              style: TextStyle(
+                                fontSize: 80,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF8B4CDE),
+                                height: 0.8,
+                              ),
+                            ),
+                            Positioned(
+                              top: 10,
+                              right: 15,
+                              child: Container(
+                                width: 15,
+                                height: 15,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFE6A85C),
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 15,
+                              right: 5,
+                              child: Container(
+                                width: 25,
+                                height: 8,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFE6A85C),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // NAWEL text
+                      Text(
+                        'NAWEL',
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF8B4CDE),
+                          letterSpacing: 2,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          Spacer(),
+
+          // Content section
+          Container(
+            padding: EdgeInsets.all(30),
+            child: Column(
+              children: [
+                Text(
+                  data.title,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 16),
+                Text(
+                  data.description,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.black54,
+                    height: 1.5,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 40),
+
+                // Get Started Button
+                SizedBox(
+                  width: double.infinity,
+                  height: 55,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Handle button press
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF8B4CDE),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      elevation: 0,
+                    ),
+                    child: Text(
+                      'Get Started',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 20),
+
+                // Next text
+                Text(
+                  'next',
+                  style: TextStyle(fontSize: 14, color: Colors.black45),
+                ),
+
+                SizedBox(height: 30),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class OnboardingData {
+  final String title;
+  final String description;
+
+  OnboardingData({required this.title, required this.description});
 }
