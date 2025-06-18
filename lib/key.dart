@@ -1,3 +1,0 @@
-const supabaseUrl = 'https://oukzkugnmyzgpkzambln.supabase.co';
-const supabaseKey =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im91a3prdWdubXl6Z3BremFtYmxuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAwOTk5MTEsImV4cCI6MjA2NTY3NTkxMX0.RDPVmuQgUWHNGR9GEu1Z318rfOm0U9mcuYM9DMhFprY';

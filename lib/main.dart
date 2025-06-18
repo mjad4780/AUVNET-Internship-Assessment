@@ -11,7 +11,6 @@ import 'package:task/core/helpers/cache_helper.dart';
 
 import 'package:task/core/helpers/observer.dart';
 import 'package:task/core/widget/modern_error_screen.dart';
-import 'package:task/key.dart';
 import 'package:device_preview/device_preview.dart';
 
 import 'core/helpers/hive_service.dart';
@@ -34,7 +33,7 @@ void main() async {
   await _setInitialRoute();
 
   // Initialize Supabase for backend services.
-  await Supabase.initialize(url: supabaseUrl, anonKey: supabaseKey);
+  await Supabase.initialize(url: 'supabaseUrl', anonKey: 'supabaseKey');
 
   // Set custom error widget.
   ErrorWidget.builder =

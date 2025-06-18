@@ -27,39 +27,62 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+# Dependencies specify other packages that your package needs in order to work.
 dependencies:
-  animate_do: ^3.3.4
-  connectivity_plus: ^6.1.0
-  dartz: ^0.10.1
-  device_preview: ^1.2.0
+  # animate_do: Ready-to-use animation effects for UI elements.
+  animate_do: ^3.3.4 
+  # connectivity_plus: Check internet connectivity status (WiFi, Mobile, etc.).
+  connectivity_plus: ^6.1.0 
+  # dartz: Functional programming utilities like Either and Option.
+  dartz: ^0.10.1 
+  # device_preview: Preview your app on different device sizes during development.
+  device_preview: ^1.2.0 
+  # flutter: The core Flutter framework.
   flutter:
-    sdk: flutter
-  flutter_bloc: ^8.1.6
-  flutter_secure_storage: ^9.2.4
-  flutter_native_splash: ^2.4.2
-  flutter_screenutil: ^5.9.3
-  flutter_svg: ^2.0.9
-  get_it: ^8.0.1
-  supabase_flutter: ^2.8.1
-  skeletonizer: ^1.4.3
-  cached_network_image: ^3.4.1
-  awesome_dialog: ^3.2.1
-  carousel_slider: ^5.1.1
-  equatable: ^2.0.7
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
-  
+    sdk: flutter 
+  # flutter_bloc: State management using the BLoC (Business Logic Component) pattern.
+  flutter_bloc: ^8.1.6 
+  # flutter_secure_storage: Securely store sensitive data on the device.
+  flutter_secure_storage: ^9.2.4 
+  # flutter_native_splash: Automatically generate a splash screen for your app.
+  flutter_native_splash: ^2.4.2 
+  # flutter_screenutil: Automatically adapt UI sizes to different screen sizes.
+  flutter_screenutil: ^5.9.3 
+  # flutter_svg: Display SVG images in Flutter apps.
+  flutter_svg: ^2.0.9 
+  # get_it: Dependency injection library for managing app dependencies.
+  get_it: ^8.0.1 
+  # supabase_flutter: Connect your app to Supabase database and services.
+  supabase_flutter: ^2.8.1 
+  # skeletonizer: Show skeleton loading effects while data is loading.
+  skeletonizer: ^1.4.3 
+  # cached_network_image: Load and cache images from the internet.
+  cached_network_image: ^3.4.1 
+  # awesome_dialog: Beautiful and easy-to-use dialog widgets.
+  awesome_dialog: ^3.2.1 
+  # carousel_slider: Create image or item sliders.
+  carousel_slider: ^5.1.1 
+  # equatable: Simplifies object comparison in Dart.
+  equatable: ^2.0.7 
+  # hive: Lightweight and fast local NoSQL database.
+  hive: ^2.2.3 
+  # hive_flutter: Hive integration for Flutter.
+  hive_flutter: ^1.1.0 
 
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.8
+  # cupertino_icons: iOS style icons for Flutter apps.
+  cupertino_icons: ^1.0.8 
 
+# Dev dependencies are packages needed only during development and testing.
 dev_dependencies:
-  hive_generator: ^2.0.1
-  build_runner: ^2.4.7
-  flutter_launcher_icons: ^0.14.4
+  # hive_generator: Generates code for Hive models.
+  hive_generator: ^2.0.1 
+  # build_runner: Tool for code generation.
+  build_runner: ^2.4.7 
+  # flutter_launcher_icons: Automatically generate app launcher icons.
+  flutter_launcher_icons: ^0.14.4 
+  # flutter_test: Testing library for Flutter apps.
   flutter_test:
-    sdk: flutter
+    sdk: flutter 
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -116,17 +139,16 @@ flutter:
           weight: 400
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+# flutter_launcher_icons configuration for generating app icons.
 flutter_launcher_icons:
   android: "ic_launcher"
   ios: true
-
   image_path: "assets/images/logo.png"
   adaptive_icon_foreground: "assets/images/logo.png" # Set the foreground image (same or different from image_path)
-
   adaptive_icon_background: "#FFFFFF"
-
   min_sdk_android: 21 # android min sdk min:16, default 21
 
+# flutter_assets configuration for generating Dart asset references.
 flutter_assets:
   assets_path: assets/images/
   output_path: lib/utility/
