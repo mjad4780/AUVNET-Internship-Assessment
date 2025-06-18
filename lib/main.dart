@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:task/core/Router/route_string.dart';
+import 'package:task/core/app/app.dart';
+import 'package:task/core/constants/const.dart';
 import 'package:task/core/get_it/get_it.dart';
+import 'package:task/core/helpers/cache_helper.dart';
 
 import 'package:task/core/helpers/observer.dart';
 import 'package:task/core/widget/modern_error_screen.dart';
 import 'package:task/key.dart';
 import 'package:device_preview/device_preview.dart';
-import 'package:task/features/home/presentation/pages/home_page.dart';
 
-import 'core/service/cache/hive_service.dart';
+import 'core/helpers/hive_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,17 +21,28 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   setupServise();
   await HiveService.initHive();
-  // await getIt<ConnectivityController>().init();
-
-  // await getIt<CacheHelper>().init();
 
   await ScreenUtil.ensureScreenSize();
-
+  await checkIfLoggedInUser();
   await Supabase.initialize(url: supabaseUrl, anonKey: supabaseKey);
   ErrorWidget.builder =
       (FlutterErrorDetails details) => ModernErrorScreen(errorDetails: details);
 
-  runApp(DevicePreview(enabled: true, builder: (context) => MyApp()));
+  runApp(
+    DevicePreview(
+      enabled: true,
+      builder: (context) => const AuvnetAssessmentApp(),
+    ),
+  );
+}
+
+checkIfLoggedInUser() async {
+  bool? user = await getIt<CacheHelper>().getBool(Constants.keyOnbording);
+  if (user == true) {
+    isLoggedInUser = StringRoute.signIn;
+  } else {
+    isLoggedInUser = StringRoute.onBoarding;
+  }
 }
 
 // SmoothPageIndicator(
@@ -46,16 +60,3 @@ void main() async {
 //       activeDotColor:  Colors.indigo
 //   ),
 // )
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'NAWEL App',
-      // theme: ThemeData(primarySwatch: Colors.purple),
-      home: HomeScreen(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}

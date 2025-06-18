@@ -7,25 +7,17 @@ void testAlert(BuildContext context, String title, String body) {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
     title: Text(title),
     content: SingleChildScrollView(
-      child: ListBody(
-        children: <Widget>[
-          Text(body),
-        ],
-      ),
+      child: ListBody(children: <Widget>[Text(body)]),
     ),
     actions: <Widget>[
       TextButton(
-        child: const Text(
-          'cancel',
-        ),
+        child: const Text('cancel'),
         onPressed: () {
           Navigator.of(context).pop(false);
         },
       ),
       TextButton(
-        child: const Text(
-          'Approve',
-        ),
+        child: const Text('Approve'),
         onPressed: () {
           Navigator.of(context).pop(true);
 
@@ -36,22 +28,9 @@ void testAlert(BuildContext context, String title, String body) {
   );
 
   showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      });
-}
-
-void warring(BuildContext context, String title, String body) {
-  var alert = AlertDialog(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-    title: Text(title),
-    content: Text(body),
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
   );
-
-  showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      });
 }

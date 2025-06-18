@@ -31,11 +31,11 @@ class AppTextButton extends StatelessWidget {
       style: ButtonStyle(
         shape: WidgetStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius ?? 30.0),
+            borderRadius: BorderRadius.circular(borderRadius ?? 10.0),
           ),
         ),
         backgroundColor: WidgetStatePropertyAll(
-          backgroundColor ?? context.color.lightGrey100,
+          backgroundColor ?? context.color.purple100,
         ),
         padding: WidgetStateProperty.all<EdgeInsets>(
           EdgeInsets.symmetric(
@@ -50,13 +50,7 @@ class AppTextButton extends StatelessWidget {
       onPressed: onPressed,
       child: Align(
         alignment: Alignment.center,
-        child: Text(
-          buttonText,
-          style: context.textStyle.headlineMedium!.copyWith(
-            color: context.color.white100,
-            fontSize: 19,
-          ),
-        ),
+        child: Text(buttonText, style: context.textStyle.displayMedium!),
       ),
     );
   }

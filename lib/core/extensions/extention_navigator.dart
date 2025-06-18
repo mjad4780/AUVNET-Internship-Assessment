@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:task/core/style/color_extension.dart';
 
-import '../language/app_localizations.dart';
-
 extension Navigation on BuildContext {
   MyColors get color => Theme.of(this).extension<MyColors>()!;
 
-  // images
-
   // style
   TextTheme get textStyle => Theme.of(this).textTheme;
-
-  //Language
-  String translate(String langkey) {
-    return AppLocalizations.of(this)!.translate(langkey).toString();
-  }
 
   //Navigation
 

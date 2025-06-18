@@ -1,10 +1,10 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:task/core/constants/const.dart';
 
-import '../../../features/home/data/models/poster_model.dart';
-import '../../../features/home/data/models/response_home_model.dart';
-import '../../../features/home/data/models/restaurant_model.dart';
-import '../../../features/home/data/models/service_model.dart';
+import '../../features/home/data/models/poster_model.dart';
+import '../../features/home/data/models/response_home_model.dart';
+import '../../features/home/data/models/restaurant_model.dart';
+import '../../features/home/data/models/service_model.dart';
 
 class HiveService {
   static Future<void> initHive() async {

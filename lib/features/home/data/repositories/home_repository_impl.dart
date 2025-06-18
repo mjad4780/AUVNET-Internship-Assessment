@@ -1,11 +1,11 @@
 import 'package:task/core/error/failures.dart';
 import 'package:task/core/get_it/get_it.dart';
 import 'package:task/core/helpers/connectivity_controller.dart';
+import 'package:task/features/home/data/datasources/home_local_datasource.dart';
+import 'package:task/features/home/data/datasources/home_remote_datasource.dart';
 
 import '../../domain/entities/home_entity.dart';
 import '../../domain/repositories/home_repository.dart';
-import '../datasources/home_local_datasource.dart';
-import '../datasources/home_remote_datasource.dart';
 
 import 'package:dartz/dartz.dart';
 

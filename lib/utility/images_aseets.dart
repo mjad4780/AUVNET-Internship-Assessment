@@ -5,6 +5,7 @@ class Assets {
   /// Assets for imagesBg
   /// assets/images/bg.svg
   static const String imagesBg = "assets/images/bg.svg";
+  static const String logoAuth = "assets/images/nawel.jpg";
 
   /// Assets for imagesGroup 11011
   /// assets/images/Group 11011.svg
@@ -56,7 +57,7 @@ class Assets {
 
   /// Assets for imagesNawel 7
   /// assets/images/nawel 7.svg
-  static const String imagesNawel7 = "assets/images/nawel 7.svg";
+  static const String imagesNawel7 = "assets/images/nawel7.svg";
 
   /// Assets for imagesProiconsCart
   /// assets/images/proicons_cart.svg

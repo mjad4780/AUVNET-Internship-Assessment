@@ -1,3 +1,7 @@
+import 'package:task/core/Router/route_string.dart';
+
+String isLoggedInUser = StringRoute.onBoarding;
+
 class Constants {
   //names box cache
   static const String homeDataBox = 'home_data';
@@ -9,4 +13,6 @@ class Constants {
   //name key cache
   static const String homeDataKey = 'home_data_key';
   static const String homeDataTimestamp = 'home_data_timestamp';
+  //
+  static const String keyOnbording = 'keyOnbording';
 }

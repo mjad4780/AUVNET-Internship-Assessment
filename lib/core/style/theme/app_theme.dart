@@ -10,11 +10,34 @@ class AppTheme {
     scaffoldBackgroundColor: AppColorligth.lightPeach100,
     fontFamily: 'Nunito',
     brightness: Brightness.light,
+    textTheme: TextTheme(
+      displayLarge: TextStyle(
+        color: const Color(0xFF333333),
+        fontSize: 28,
+        fontFamily: 'Rubik',
+        fontWeight: FontWeight.w500,
+      ),
+      displaySmall: TextStyle(
+        color: const Color(0xE5677294),
+        fontSize: 14,
+        fontFamily: 'Rubik',
+        fontWeight: FontWeight.w400,
+        height: 1.66,
+        letterSpacing: -0.30,
+      ),
+      displayMedium: TextStyle(
+        color: Colors.white,
+        fontSize: 18,
+        fontFamily: 'Rubik',
+        fontWeight: FontWeight.w500,
+      ),
+    ),
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColorligth.white100,
       elevation: 0,
       centerTitle: true,
       iconTheme: IconThemeData(color: AppColorligth.black100),
+
       titleTextStyle: TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.bold,
@@ -28,6 +51,28 @@ class AppTheme {
     primaryColor: AppColorsDark.white100,
     scaffoldBackgroundColor: Colors.black,
     fontFamily: 'Nunito',
+    textTheme: TextTheme(
+      displayLarge: TextStyle(
+        color: Colors.white,
+        fontSize: 28,
+        fontFamily: 'Rubik',
+        fontWeight: FontWeight.w500,
+      ),
+      displaySmall: TextStyle(
+        color: Colors.white,
+        fontSize: 14,
+        fontFamily: 'Rubik',
+        fontWeight: FontWeight.w400,
+        height: 1.66,
+        letterSpacing: -0.30,
+      ),
+      displayMedium: TextStyle(
+        color: Colors.black,
+        fontSize: 18,
+        fontFamily: 'Rubik',
+        fontWeight: FontWeight.w500,
+      ),
+    ),
     brightness: Brightness.dark,
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.black,
