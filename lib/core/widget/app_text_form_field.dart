@@ -57,16 +57,14 @@ class AppTextFormField extends StatelessWidget {
                 color: context.color.darkBackground58,
                 width: 1.3,
               ),
-              borderRadius: BorderRadius.circular(22.0),
+              borderRadius: BorderRadius.circular(10.0),
             ),
         enabledBorder:
             enabledBorder ??
             OutlineInputBorder(
-              borderSide: BorderSide(
-                color: context.color.lighterGray,
-                width: 1.3,
-              ),
-              borderRadius: BorderRadius.circular(22.0),
+              borderSide: BorderSide(color: context.color.white100, width: 1.3),
+
+              borderRadius: BorderRadius.circular(10.0),
             ),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 1.3),
@@ -79,7 +77,7 @@ class AppTextFormField extends StatelessWidget {
         errorStyle: context.textStyle.bodyMedium!.copyWith(color: Colors.red),
         hintText: hintText,
         suffixIcon: suffixIcon,
-        fillColor: backgroundColor ?? context.color.moreLightGray,
+        fillColor: backgroundColor ?? Color(0x33C4C4C4),
         filled: true,
       ),
 

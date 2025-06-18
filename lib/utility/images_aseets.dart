@@ -5,6 +5,8 @@ class Assets {
   /// Assets for imagesBg
   /// assets/images/bg.svg
   static const String imagesBg = "assets/images/bg.svg";
+  static const String person = "assets/images/person.svg";
+
   static const String logoAuth = "assets/images/nawel.jpg";
 
   /// Assets for imagesGroup 11011

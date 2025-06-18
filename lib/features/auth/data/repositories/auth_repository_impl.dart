@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:task/core/constants/const.dart';
+import 'package:task/core/helpers/cache_helper.dart';
 
 import '../../../../core/error/error_handler_supabase.dart';
 import '../../../../core/error/failures.dart';
@@ -28,6 +30,10 @@ class AuthRepositoryImpl implements AuthRepository {
       final UserModel userModel = await remoteDataSource.signIn(
         email,
         password,
+      );
+      await getIt<CacheHelper>().saveString(
+        key: Constants.keyLogin,
+        value: userModel.id,
       );
       return Right(userModel);
     } catch (e) {

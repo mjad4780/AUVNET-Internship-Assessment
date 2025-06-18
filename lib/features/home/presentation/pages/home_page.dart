@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:task/core/helpers/spacing.dart';
+import 'package:task/utility/images_aseets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -6,242 +9,288 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(0),
-        child: AppBar(backgroundColor: Colors.grey[200], elevation: 0),
-      ),
       body: RefreshIndicator(
-        onRefresh: () async {
-          // TODO: implement refresh logic
-        },
+        onRefresh: () async {},
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            // Header
             Container(
-              decoration: const BoxDecoration(
+              width: width(context),
+              height: 156,
+              decoration: ShapeDecoration(
                 gradient: LinearGradient(
-                  colors: [
-                    Color(0xFFB16CEA),
-                    Color(0xFFFF5E69),
-                    Color(0xFFFF8A56),
-                    Color(0xFFFFC844),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                  colors: [const Color(0xFF8900FE), const Color(0xFFFFDE59)],
                 ),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(24),
-                  bottomRight: Radius.circular(24),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
                 ),
               ),
-              padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
               child: Row(
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          "Delivering to",
-                          style: TextStyle(color: Colors.white70, fontSize: 13),
-                        ),
-                        SizedBox(height: 2),
-                        Text(
-                          "Al Satwa, 81A Street",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          "Hi hepa!",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const CircleAvatar(
-                    radius: 22,
-                    backgroundImage: NetworkImage(
-                      "https://randomuser.me/api/portraits/women/44.jpg",
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            // Services
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Services:",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Column(
                     children: [
-                      _ServiceCard(
-                        icon: Icons.fastfood,
-                        label: "Food",
-                        badge: "Up to 50%",
-                        badgeColor: Colors.purple,
+                      Text(
+                        'Delivering to',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontFamily: 'DM Sans',
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                      _ServiceCard(
-                        icon: Icons.health_and_safety,
-                        label: "Health & wellness",
-                        badge: "20mins",
-                        badgeColor: Colors.purple,
+                      Text(
+                        'Al Satwa, 81A Street',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontFamily: 'DM Sans',
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 0.02,
+                        ),
                       ),
-                      _ServiceCard(
-                        icon: Icons.shopping_basket,
-                        label: "Groceries",
-                        badge: "15 mins",
-                        badgeColor: Colors.purple,
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            // Promo code
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                elevation: 0.5,
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    children: const [
-                      Icon(Icons.card_giftcard, color: Colors.amber, size: 32),
-                      SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          "Got a code !\nAdd your code and save on your order",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                          ),
+                      Text(
+                        'Hi hepa! ',
+                        style: TextStyle(
+                          color: const Color(0xFFF9F9F9),
+                          fontSize: 30,
+                          fontFamily: 'Rubik',
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: -0.30,
                         ),
                       ),
                     ],
                   ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            // Shortcuts
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Shortcuts:",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-                  ),
-                  const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      _ShortcutCard(icon: Icons.history, label: "Past orders"),
-                      _ShortcutCard(
-                        icon: Icons.local_offer,
-                        label: "Super Saver",
-                      ),
-                      _ShortcutCard(icon: Icons.star_half, label: "Must-tries"),
-                      _ShortcutCard(
-                        icon: Icons.card_giftcard,
-                        label: "Give Back",
-                      ),
-                      _ShortcutCard(icon: Icons.star, label: "Best Sellers"),
-                    ],
-                  ),
+                  SvgPicture.asset(Assets.person),
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            // Header
+            //       Container(
+            //         decoration: const BoxDecoration(
+            //           gradient: LinearGradient(
+            //             colors: [
+            //               Color(0xFFB16CEA),
+            //               Color(0xFFFF5E69),
+            //               Color(0xFFFF8A56),
+            //               Color(0xFFFFC844),
+            //             ],
+            //             begin: Alignment.topLeft,
+            //             end: Alignment.bottomRight,
+            //           ),
+            //           borderRadius: BorderRadius.only(
+            //             bottomLeft: Radius.circular(24),
+            //             bottomRight: Radius.circular(24),
+            //           ),
+            //         ),
+            //         padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
+            //         child: Row(
+            //           children: [
+            //             Expanded(
+            //               child: Column(
+            //                 crossAxisAlignment: CrossAxisAlignment.start,
+            //                 children: const [
+            //                   Text(
+            //                     "Delivering to",
+            //                     style: TextStyle(color: Colors.white70, fontSize: 13),
+            //                   ),
+            //                   SizedBox(height: 2),
+            //                   Text(
+            //                     "Al Satwa, 81A Street",
+            //                     style: TextStyle(
+            //                       color: Colors.white,
+            //                       fontWeight: FontWeight.bold,
+            //                       fontSize: 15,
+            //                     ),
+            //                   ),
+            //                   SizedBox(height: 8),
+            //                   Text(
+            //                     "Hi hepa!",
+            //                     style: TextStyle(
+            //                       color: Colors.white,
+            //                       fontWeight: FontWeight.bold,
+            //                       fontSize: 22,
+            //                     ),
+            //                   ),
+            //                 ],
+            //               ),
+            //             ),
+            //             const CircleAvatar(
+            //               radius: 22,
+            //               backgroundImage: NetworkImage(
+            //                 "https://randomuser.me/api/portraits/women/44.jpg",
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //       const SizedBox(height: 16),
 
-            // Poster/Carousel
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SizedBox(
-                height: 140,
-                child: PageView(
-                  children: [
-                    _PosterCard(
-                      imageUrl:
-                          "https://www.krispykremearabia.com/images/mms-banner.jpg",
-                      title: "Made with M&M's",
-                      subtitle: "For a limited time only",
-                    ),
-                    // Add more posters if needed
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
+            //       // Services
+            //       Padding(
+            //         padding: const EdgeInsets.symmetric(horizontal: 16),
+            //         child: Column(
+            //           crossAxisAlignment: CrossAxisAlignment.start,
+            //           children: [
+            //             const Text(
+            //               "Services:",
+            //               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+            //             ),
+            //             const SizedBox(height: 12),
+            //             Row(
+            //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //               children: [
+            //                 _ServiceCard(
+            //                   icon: Icons.fastfood,
+            //                   label: "Food",
+            //                   badge: "Up to 50%",
+            //                   badgeColor: Colors.purple,
+            //                 ),
+            //                 _ServiceCard(
+            //                   icon: Icons.health_and_safety,
+            //                   label: "Health & wellness",
+            //                   badge: "20mins",
+            //                   badgeColor: Colors.purple,
+            //                 ),
+            //                 _ServiceCard(
+            //                   icon: Icons.shopping_basket,
+            //                   label: "Groceries",
+            //                   badge: "15 mins",
+            //                   badgeColor: Colors.purple,
+            //                 ),
+            //               ],
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //       const SizedBox(height: 16),
 
-            // Popular restaurants
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: const Text(
-                "Popular restaurants nearby",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-              ),
-            ),
-            const SizedBox(height: 12),
-            SizedBox(
-              height: 100,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                children: const [
-                  _RestaurantCard(
-                    imageUrl: "https://logo.clearbit.com/allobeirut.com",
-                    name: "Allo Beirut",
-                    time: "32 mins",
-                  ),
-                  SizedBox(width: 12),
-                  _RestaurantCard(
-                    imageUrl: "https://logo.clearbit.com/laffah.com",
-                    name: "Laffah",
-                    time: "38 mins",
-                  ),
-                  SizedBox(width: 12),
-                  _RestaurantCard(
-                    imageUrl: "https://logo.clearbit.com/falafilalrabih.com",
-                    name: "Falafil Al Rabih",
-                    time: "44 mins",
-                  ),
-                  SizedBox(width: 12),
-                  _RestaurantCard(
-                    imageUrl: "https://logo.clearbit.com/barbar.com",
-                    name: "Barbar",
-                    time: "34 mins",
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 24),
+            //       // Promo code
+            //       Padding(
+            //         padding: const EdgeInsets.symmetric(horizontal: 16),
+            //         child: Card(
+            //           shape: RoundedRectangleBorder(
+            //             borderRadius: BorderRadius.circular(16),
+            //           ),
+            //           elevation: 0.5,
+            //           child: Padding(
+            //             padding: const EdgeInsets.all(16),
+            //             child: Row(
+            //               children: const [
+            //                 Icon(Icons.card_giftcard, color: Colors.amber, size: 32),
+            //                 SizedBox(width: 12),
+            //                 Expanded(
+            //                   child: Text(
+            //                     "Got a code !\nAdd your code and save on your order",
+            //                     style: TextStyle(
+            //                       fontSize: 15,
+            //                       fontWeight: FontWeight.w500,
+            //                     ),
+            //                   ),
+            //                 ),
+            //               ],
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //       const SizedBox(height: 16),
+
+            //       // Shortcuts
+            //       Padding(
+            //         padding: const EdgeInsets.symmetric(horizontal: 16),
+            //         child: Column(
+            //           crossAxisAlignment: CrossAxisAlignment.start,
+            //           children: [
+            //             const Text(
+            //               "Shortcuts:",
+            //               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+            //             ),
+            //             const SizedBox(height: 12),
+            //             Row(
+            //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //               children: const [
+            //                 _ShortcutCard(icon: Icons.history, label: "Past orders"),
+            //                 _ShortcutCard(
+            //                   icon: Icons.local_offer,
+            //                   label: "Super Saver",
+            //                 ),
+            //                 _ShortcutCard(icon: Icons.star_half, label: "Must-tries"),
+            //                 _ShortcutCard(
+            //                   icon: Icons.card_giftcard,
+            //                   label: "Give Back",
+            //                 ),
+            //                 _ShortcutCard(icon: Icons.star, label: "Best Sellers"),
+            //               ],
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //       const SizedBox(height: 16),
+
+            //       // Poster/Carousel
+            //       Padding(
+            //         padding: const EdgeInsets.symmetric(horizontal: 16),
+            //         child: SizedBox(
+            //           height: 140,
+            //           child: PageView(
+            //             children: [
+            //               _PosterCard(
+            //                 imageUrl:
+            //                     "https://www.krispykremearabia.com/images/mms-banner.jpg",
+            //                 title: "Made with M&M's",
+            //                 subtitle: "For a limited time only",
+            //               ),
+            //               // Add more posters if needed
+            //             ],
+            //           ),
+            //         ),
+            //       ),
+            //       const SizedBox(height: 16),
+
+            //       // Popular restaurants
+            //       Padding(
+            //         padding: const EdgeInsets.symmetric(horizontal: 16),
+            //         child: const Text(
+            //           "Popular restaurants nearby",
+            //           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+            //         ),
+            //       ),
+            //       const SizedBox(height: 12),
+            //       SizedBox(
+            //         height: 100,
+            //         child: ListView(
+            //           scrollDirection: Axis.horizontal,
+            //           padding: const EdgeInsets.symmetric(horizontal: 16),
+            //           children: const [
+            //             _RestaurantCard(
+            //               imageUrl: "https://logo.clearbit.com/allobeirut.com",
+            //               name: "Allo Beirut",
+            //               time: "32 mins",
+            //             ),
+            //             SizedBox(width: 12),
+            //             _RestaurantCard(
+            //               imageUrl: "https://logo.clearbit.com/laffah.com",
+            //               name: "Laffah",
+            //               time: "38 mins",
+            //             ),
+            //             SizedBox(width: 12),
+            //             _RestaurantCard(
+            //               imageUrl: "https://logo.clearbit.com/falafilalrabih.com",
+            //               name: "Falafil Al Rabih",
+            //               time: "44 mins",
+            //             ),
+            //             SizedBox(width: 12),
+            //             _RestaurantCard(
+            //               imageUrl: "https://logo.clearbit.com/barbar.com",
+            //               name: "Barbar",
+            //               time: "34 mins",
+            //             ),
+            //           ],
+            //         ),
+            //       ),
+            //       const SizedBox(height: 24),
           ],
         ),
       ),

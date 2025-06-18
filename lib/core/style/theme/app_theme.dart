@@ -7,10 +7,16 @@ class AppTheme {
   static ThemeData get lightTheme => ThemeData(
     extensions: const <ThemeExtension<dynamic>>[MyColors.light],
     primaryColor: AppColorligth.white100,
-    scaffoldBackgroundColor: AppColorligth.lightPeach100,
+    scaffoldBackgroundColor: AppColorligth.white100,
     fontFamily: 'Nunito',
     brightness: Brightness.light,
     textTheme: TextTheme(
+      bodyMedium: TextStyle(
+        color: const Color(0xFF1877F2),
+        fontSize: 14,
+        fontFamily: 'DM Sans',
+        fontWeight: FontWeight.w700,
+      ),
       displayLarge: TextStyle(
         color: const Color(0xFF333333),
         fontSize: 28,
@@ -52,6 +58,12 @@ class AppTheme {
     scaffoldBackgroundColor: Colors.black,
     fontFamily: 'Nunito',
     textTheme: TextTheme(
+      bodyMedium: TextStyle(
+        color: const Color(0xFF1877F2),
+        fontSize: 14,
+        fontFamily: 'DM Sans',
+        fontWeight: FontWeight.w700,
+      ),
       displayLarge: TextStyle(
         color: Colors.white,
         fontSize: 28,

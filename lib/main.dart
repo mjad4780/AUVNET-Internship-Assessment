@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:task/core/Router/route_string.dart';
 import 'package:task/core/app/app.dart';
 import 'package:task/core/constants/const.dart';
+import 'package:task/core/extensions/extention_navigator.dart';
 import 'package:task/core/get_it/get_it.dart';
 import 'package:task/core/helpers/cache_helper.dart';
 
@@ -37,9 +38,13 @@ void main() async {
 }
 
 checkIfLoggedInUser() async {
+  String? userId = await getIt<CacheHelper>().getString(Constants.keyLogin);
+
   bool? user = await getIt<CacheHelper>().getBool(Constants.keyOnbording);
-  if (user == true) {
-    isLoggedInUser = StringRoute.signIn;
+  if (!userId.isNullOrEmpty() == true) {
+    isLoggedInUser = StringRoute.home;
+  } else if (user == true) {
+    isLoggedInUser = StringRoute.home;
   } else {
     isLoggedInUser = StringRoute.onBoarding;
   }

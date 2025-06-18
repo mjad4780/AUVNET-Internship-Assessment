@@ -15,4 +15,5 @@ class Constants {
   static const String homeDataTimestamp = 'home_data_timestamp';
   //
   static const String keyOnbording = 'keyOnbording';
+  static const String keyLogin = 'keyLogin';
 }

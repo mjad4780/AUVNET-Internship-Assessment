@@ -40,7 +40,9 @@ class AppTexts {
   static const bestSellers = "Best Sellers";
 
   // Auth
+  static const email = "Log in";
   static const logIn = "Log in";
+
   static const createAccount = "Create an account";
   static const signUp = "Sign up";
   static const getStarted = "Get Started";

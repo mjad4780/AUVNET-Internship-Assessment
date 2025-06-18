@@ -19,9 +19,8 @@ class SignInBlocListener extends StatelessWidget {
       listener: (context, state) {
         if (state is SignInSuccess) {
           context.pop();
-          buildSuccess(context, 'Sign in successful', () {
-            context.pushName(StringRoute.home);
-          });
+
+          context.pushName(StringRoute.home);
         } else if (state is SignInError) {
           context.pop();
           buildErorr(context, state.message);
