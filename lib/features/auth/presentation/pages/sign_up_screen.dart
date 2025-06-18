@@ -20,12 +20,13 @@ class SignUpScreen extends StatefulWidget {
 late TextEditingController email;
 late TextEditingController password;
 late TextEditingController repassword;
-final formKey = GlobalKey<FormState>();
+late GlobalKey<FormState> _formKey; // Defined at class level
 
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
   void initState() {
     super.initState();
+    _formKey = GlobalKey<FormState>(); // Initialize the form key
     email = TextEditingController();
     password = TextEditingController();
     repassword = TextEditingController();
@@ -34,6 +35,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   void dispose() {
     email.dispose();
+    _formKey.currentState?.dispose();
     password.dispose();
     repassword.dispose();
     super.dispose();
@@ -48,9 +50,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
           return Scaffold(
             body: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Form(
-                key: formKey,
-                child: SingleChildScrollView(
+              child: SingleChildScrollView(
+                child: Form(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+
+                  key: _formKey,
                   child: Column(
                     children: [
                       verticalSpace(40),
@@ -65,8 +69,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Column(
                           children: [
                             AppTextFormField(
+                              prfixIcon: Icon(Icons.email_outlined),
                               hintText: AppTexts.mail,
-                              controller: password,
+                              controller: email,
                               validator: (value) {
                                 if (value == null ||
                                     value.isEmpty ||
@@ -77,6 +82,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             verticalSpace(20),
                             AppTextFormField(
+                              prfixIcon: Icon(Icons.lock_outline),
+                              isObscureText: true,
                               controller: password,
                               hintText: AppTexts.password,
                               validator: (value) {
@@ -87,12 +94,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             verticalSpace(20),
                             AppTextFormField(
+                              prfixIcon: Icon(Icons.lock_outline),
+
+                              isObscureText: true,
                               controller: repassword,
                               hintText: AppTexts.password,
                               validator: (value) {
                                 if (value == null ||
                                     value.isEmpty ||
-                                    AppRegex.repassword(password.text, value)) {
+                                    !AppRegex.repassword(
+                                      password.text,
+                                      value,
+                                    )) {
                                   return 'Please enter a valid repassword';
                                 }
                               },
@@ -104,9 +117,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15),
                         child: AppTextButton(
-                          buttonText: AppTexts.logIn,
+                          buttonText: AppTexts.signUp,
                           onPressed: () {
-                            if (formKey.currentState!.validate()) {
+                            if (_formKey.currentState!.validate()) {
                               context.read<AuthBloc>().add(
                                 SignUpEvent(
                                   email: email.text,
@@ -114,10 +127,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                               );
                             }
-                            // context.pushName(
-                            //   StringRoute.signUp,
-                            //   arguments: context.read<AuthBloc>(),
-                            // );
                           },
                         ),
                       ),

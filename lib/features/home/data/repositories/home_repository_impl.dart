@@ -9,6 +9,9 @@ import '../../domain/repositories/home_repository.dart';
 
 import 'package:dartz/dartz.dart';
 
+// Repository implementation for fetching home data from local or remote sources.
+// Uses ConnectivityController to decide between cache and remote fetch.
+// Returns cached data if offline and available, otherwise fetches from remote and caches it.
 class HomeRepositoryImpl implements HomeRepository {
   final HomeLocalDataSource localDataSource;
   final HomeRemoteDataSource remoteDataSource;
@@ -31,6 +34,7 @@ class HomeRepositoryImpl implements HomeRepository {
       final response = await remoteDataSource.getHomeData();
       if (response.result == true) {
         await localDataSource.clearCache();
+
         await localDataSource.cacheHomeData(response.data);
         return Right(response.data!);
       } else {

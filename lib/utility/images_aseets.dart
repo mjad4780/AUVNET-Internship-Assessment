@@ -4,14 +4,35 @@ class Assets {
 
   /// Assets for imagesBg
   /// assets/images/bg.svg
+  ///
+  ///
+
+  static const String delev = "assets/images/icon-park-outline_delivery.jpg";
+  static const String persons = "assets/images/li_user.jpg";
+  static const String nawels = "assets/images/nawel 7.jpg";
+  static const String cart = "assets/images/proicons_cart.jpg";
+  static const String categories =
+      "assets/images/material-symbols_action-key-outline.jpg";
+
+  ///
+  ///
+  ///
+  ///
+  ///
+  ///
+  ///
+  ///
+  ///
   static const String imagesBg = "assets/images/bg.svg";
-  static const String person = "assets/images/person.svg";
+  static const String person = "assets/images/persons.jpg";
 
   static const String logoAuth = "assets/images/nawel.jpg";
 
   /// Assets for imagesGroup 11011
   /// assets/images/Group 11011.svg
-  static const String imagesGroup = "assets/images/Group 11011.svg";
+  static const String imagesGroup = "assets/images/Group 11014.svg";
+  static const String imagesGroupo = "assets/images/Groupo.svg";
+  static const String imagesGroups = "assets/images/Groups.jpg";
 
   /// Assets for imagesGroup 11012
   /// assets/images/Group 11012.svg
@@ -20,6 +41,7 @@ class Assets {
   /// Assets for imagesGroup 9
   /// assets/images/Group 9.svg
   static const String imagesGroup9 = "assets/images/Group 9.svg";
+  static const String menu = "assets/images/Menu 1.svg";
 
   /// Assets for imagesIcBaselineStar
   /// assets/images/ic_baseline-star.svg

@@ -16,19 +16,31 @@ import 'package:device_preview/device_preview.dart';
 
 import 'core/helpers/hive_service.dart';
 
+// Entry point of the Flutter application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Set up Bloc observer for state management.
   Bloc.observer = MyBlocObserver();
+
+  // Initialize dependency injection and Hive for local storage.
   setupServise();
   await HiveService.initHive();
 
+  // Ensure screen size is set for responsive layouts.
   await ScreenUtil.ensureScreenSize();
-  await checkIfLoggedInUser();
+
+  // Determine initial route based on cached login/onboarding status.
+  await _setInitialRoute();
+
+  // Initialize Supabase for backend services.
   await Supabase.initialize(url: supabaseUrl, anonKey: supabaseKey);
+
+  // Set custom error widget.
   ErrorWidget.builder =
       (FlutterErrorDetails details) => ModernErrorScreen(errorDetails: details);
 
+  // Run the app with DevicePreview enabled.
   runApp(
     DevicePreview(
       enabled: true,
@@ -37,31 +49,16 @@ void main() async {
   );
 }
 
-checkIfLoggedInUser() async {
+/// Determines the initial route based on login and onboarding status.
+Future<void> _setInitialRoute() async {
   String? userId = await getIt<CacheHelper>().getString(Constants.keyLogin);
+  bool? onboarded = await getIt<CacheHelper>().getBool(Constants.keyOnbording);
 
-  bool? user = await getIt<CacheHelper>().getBool(Constants.keyOnbording);
   if (!userId.isNullOrEmpty() == true) {
     isLoggedInUser = StringRoute.home;
-  } else if (user == true) {
-    isLoggedInUser = StringRoute.home;
+  } else if (onboarded == true) {
+    isLoggedInUser = StringRoute.signIn;
   } else {
     isLoggedInUser = StringRoute.onBoarding;
   }
 }
-
-// SmoothPageIndicator(
-//    controller: controller,
-//    count:  6,
-//    axisDirection: Axis.vertical,
-//    effect:  SlideEffect(
-//       spacing:  8.0,
-//       radius:  4.0,
-//       dotWidth:  24.0,
-//       dotHeight:  16.0,
-//       paintStyle:  PaintingStyle.stroke,
-//       strokeWidth:  1.5,
-//       dotColor:  Colors.grey,
-//       activeDotColor:  Colors.indigo
-//   ),
-// )

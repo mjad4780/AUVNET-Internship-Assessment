@@ -11,6 +11,18 @@ class AppTheme {
     fontFamily: 'Nunito',
     brightness: Brightness.light,
     textTheme: TextTheme(
+      headlineMedium: TextStyle(
+        fontSize: 12,
+        fontFamily: 'Poppins',
+        fontWeight: FontWeight.w400,
+        height: 1.33,
+      ),
+      bodyLarge: TextStyle(
+        color: Colors.black,
+        fontSize: 20,
+        fontFamily: 'DM Sans',
+        fontWeight: FontWeight.w700,
+      ),
       bodyMedium: TextStyle(
         color: const Color(0xFF1877F2),
         fontSize: 14,
@@ -58,6 +70,12 @@ class AppTheme {
     scaffoldBackgroundColor: Colors.black,
     fontFamily: 'Nunito',
     textTheme: TextTheme(
+      bodyLarge: TextStyle(
+        color: Colors.white,
+        fontSize: 20,
+        fontFamily: 'DM Sans',
+        fontWeight: FontWeight.w700,
+      ),
       bodyMedium: TextStyle(
         color: const Color(0xFF1877F2),
         fontSize: 14,

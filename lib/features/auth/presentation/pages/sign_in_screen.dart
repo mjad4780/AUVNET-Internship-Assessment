@@ -22,12 +22,13 @@ class SignInScreen extends StatefulWidget {
 
 late TextEditingController email;
 late TextEditingController password;
-final formKey = GlobalKey<FormState>();
+late GlobalKey<FormState> _formKeyS; // Defined at class level
 
 class _SignInScreenState extends State<SignInScreen> {
   @override
   void initState() {
     super.initState();
+    _formKeyS = GlobalKey<FormState>(); // Initialize the form key
     email = TextEditingController();
     password = TextEditingController();
   }
@@ -35,6 +36,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   void dispose() {
     email.dispose();
+    _formKeyS.currentState?.dispose();
     password.dispose();
     super.dispose();
   }
@@ -48,9 +50,11 @@ class _SignInScreenState extends State<SignInScreen> {
           return Scaffold(
             body: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Form(
-                key: formKey,
-                child: SingleChildScrollView(
+              child: SingleChildScrollView(
+                child: Form(
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+
+                  key: _formKeyS,
                   child: Column(
                     children: [
                       verticalSpace(60),
@@ -66,6 +70,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           children: [
                             AppTextFormField(
                               hintText: AppTexts.mail,
+                              prfixIcon: Icon(Icons.email_outlined),
                               controller: email,
                               validator: (value) {
                                 if (value == null ||
@@ -77,6 +82,8 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                             verticalSpace(20),
                             AppTextFormField(
+                              prfixIcon: Icon(Icons.lock_outline),
+                              isObscureText: true,
                               controller: password,
                               hintText: AppTexts.password,
                               validator: (value) {
@@ -94,7 +101,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: AppTextButton(
                           buttonText: AppTexts.logIn,
                           onPressed: () {
-                            if (formKey.currentState!.validate()) {
+                            if (_formKeyS.currentState!.validate()) {
                               context.read<AuthBloc>().add(
                                 SignInEvent(
                                   email: email.text,

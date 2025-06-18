@@ -17,7 +17,6 @@ class AuvnetAssessmentApp extends StatelessWidget {
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         debugShowCheckedModeBanner: false,
-        title: 'Education App',
         onGenerateRoute: AppRoutes.onGenerateRoute,
         initialRoute: isLoggedInUser,
       ),

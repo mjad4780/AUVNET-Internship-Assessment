@@ -10,14 +10,24 @@ class HiveService {
   static Future<void> initHive() async {
     await Hive.initFlutter();
 
-    // Register adapters
-    Hive.registerAdapter(RestaurantModelAdapter());
-    Hive.registerAdapter(ServiceModelAdapter());
-    Hive.registerAdapter(PosterModelAdapter());
-    Hive.registerAdapter(ResponseHomeModelAdapter());
+    // Register adapters (register only if not registered)
+    if (!Hive.isAdapterRegistered(RestaurantModelAdapter().typeId)) {
+      Hive.registerAdapter(RestaurantModelAdapter());
+    }
+    if (!Hive.isAdapterRegistered(ServiceModelAdapter().typeId)) {
+      Hive.registerAdapter(ServiceModelAdapter());
+    }
+    if (!Hive.isAdapterRegistered(PosterModelAdapter().typeId)) {
+      Hive.registerAdapter(PosterModelAdapter());
+    }
+    if (!Hive.isAdapterRegistered(ResponseHomeModelAdapter().typeId)) {
+      Hive.registerAdapter(ResponseHomeModelAdapter());
+    }
 
-    // Open boxes
-    await Hive.openBox<ResponseHomeModel>(Constants.homeDataBox);
+    // Open boxes only if not already open
+    if (!Hive.isBoxOpen(Constants.homeDataBox)) {
+      await Hive.openBox<ResponseHomeModel>(Constants.homeDataBox);
+    }
   }
 
   // Generic method to add data to any box
@@ -37,6 +47,8 @@ class HiveService {
   }
 
   static Future<void> clearAllCache() async {
-    await Hive.box(Constants.homeDataBox).clear();
+    //  await Hive.box(Constants.homeDataBox).;
+
+    await Hive.box<ResponseHomeModel>(Constants.homeDataBox).clear();
   }
 }

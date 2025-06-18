@@ -1,3 +1,14 @@
+/// Implementation of [AuthRemoteDataSource] that interacts with Supabase for authentication.
+///
+/// This class provides methods to sign in and sign up users using Supabase authentication.
+/// It returns a [UserModel] upon successful authentication.
+///
+/// - [signIn]: Signs in a user with the provided email and password.
+/// - [signUp]: Registers a new user with the provided email and password.
+///
+/// Requires a [SupabaseClient] instance to perform authentication operations.
+library;
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/user_model.dart';
 import 'auth_remote_datasource.dart';

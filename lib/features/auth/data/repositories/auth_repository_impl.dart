@@ -12,6 +12,11 @@ import '../datasources/auth_remote_datasource.dart';
 import '../../domain/entities/user_entity.dart';
 import '../models/user_model.dart';
 
+/// Handles authentication logic.
+/// - Uses remote data source.
+/// - Checks connectivity.
+/// - Caches user ID after sign-in.
+/// - Handles errors.
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
 

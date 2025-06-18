@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task/core/extensions/extention_navigator.dart';
 import '../../../../core/Router/route_string.dart';
-import '../../../../core/function/build_error_or_success_bar.dart';
+import '../../../../core/helpers/awesome_dialog.dart';
 import '../bloc/auth_bloc.dart';
 
 class SignInBlocListener extends StatelessWidget {

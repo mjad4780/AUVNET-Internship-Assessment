@@ -33,11 +33,11 @@ class AppTexts {
   static const discoverDeals = "Discover exclusive sales and deals every day";
 
   // Orders & Promotions
-  static const pastOrders = "Past orders";
-  static const superSaver = "Super Saver";
-  static const mustTries = "Must-tries";
-  static const giveBack = "Give Back";
-  static const bestSellers = "Best Sellers";
+  static const pastOrders = "Past\norders";
+  static const superSaver = "Super\nSaver";
+  static const mustTries = "Must\ntries";
+  static const giveBack = "Give\nBack";
+  static const bestSellers = "Best\nSellers";
 
   // Auth
   static const email = "Log in";
